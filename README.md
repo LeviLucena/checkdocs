@@ -25,6 +25,7 @@
   <img src="https://github.com/user-attachments/assets/306c0712-60dc-4d10-98ea-1608c8accc9f">
 </p>
 
+## 📜 Descrição
 Este projeto é um aplicativo web desenvolvido com Flask, que permite a análise de documentos de edital e atestados utilizando inteligência artificial. O sistema extrai texto de arquivos PDF, Word, TXT e imagens, e compara os conteúdos conforme critérios específicos definidos no edital.
 
 ![image](https://github.com/user-attachments/assets/64871cc7-b6e6-4c35-8c3b-d1ea58e79b3d)
