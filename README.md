@@ -1,0 +1,2 @@
+# checkdocs
+licitacao-analisador
