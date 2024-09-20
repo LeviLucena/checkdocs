@@ -1,4 +1,26 @@
-
+<p align="center">
+  <a href="https://www.python.org/">
+    <img src="https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python Badge" />
+  </a>
+  <a href="https://flask.palletsprojects.com/en/2.3.x/">
+    <img src="https://img.shields.io/badge/-Flask-000000?style=flat-square&logo=flask&logoColor=white" alt="Flask Badge" />
+  </a>
+  <a href="https://openai.com/">
+    <img src="https://img.shields.io/badge/-OpenAI-000000?style=flat-square&logo=openai&logoColor=white" alt="OpenAI Badge" />
+  </a>
+  <a href="https://getbootstrap.com/">
+    <img src="https://img.shields.io/badge/-Bootstrap-563D7C?style=flat-square&logo=bootstrap&logoColor=white" alt="Bootstrap Badge" />
+  </a>
+  <a href="https://pdfplumber.readthedocs.io/en/latest/">
+    <img src="https://img.shields.io/badge/-pdfplumber-000000?style=flat-square&logo=python&logoColor=white" alt="pdfplumber Badge" />
+  </a>
+  <a href="https://pytesseract.readthedocs.io/en/latest/">
+    <img src="https://img.shields.io/badge/-pytesseract-000000?style=flat-square&logo=python&logoColor=white" alt="pytesseract Badge" />
+  </a>
+  <a href="https://github.com/python-openxml/python-docx">
+    <img src="https://img.shields.io/badge/-python-docx-000000?style=flat-square&logo=python&logoColor=white" alt="python-docx Badge" />
+  </a>
+</p>
 <p align="center">
   <img src="https://github.com/user-attachments/assets/08d0c481-02d9-46e1-b350-84687cbcd040">
 </p>
