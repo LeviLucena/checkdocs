@@ -17,8 +17,8 @@
   <a href="https://pytesseract.readthedocs.io/en/latest/">
     <img src="https://img.shields.io/badge/-pytesseract-000000?style=flat-square&logo=python&logoColor=white" alt="pytesseract Badge" />
   </a>
-  <a href="https://github.com/python-openxml/python-docx">
-    <img src="https://img.shields.io/badge/-python-docx-000000?style=flat-square&logo=python&logoColor=white" alt="python-docx Badge" />
+  <a href="https://python-docx.readthedocs.io/en/latest/">
+  <img src="https://img.shields.io/badge/-python--docx-3776AB?style=flat-square&logo=python&logoColor=white" alt="python-docx Badge" />
   </a>
 </p>
 <p align="center">
