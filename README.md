@@ -33,8 +33,8 @@ Este projeto é um aplicativo web desenvolvido com Flask, que permite a análise
 
 1. Clone o repositório:
 ```
-   git clone <URL_DO_REPOSITÓRIO>
-   cd <NOME_DA_PASTA>
+   git clone https://github.com/LeviLucena/checkdocs.git
+   cd checkdocs
  ```
 
 2. Crie um ambiente virtual e ative-o:
