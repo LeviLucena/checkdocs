@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sistema de Análise de Licitações</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f3f4f6, #e4e7eb);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #555;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .upload-area {
+            border: 2px dashed #007bff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .upload-area:hover {
+            background-color: #e9ecef;
+            border-color: #0056b3;
+        }
+
+        .upload-area p {
+            font-size: 1rem;
+            color: #333;
+            margin: 0;
+        }
+
+        .file-list {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-item span {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .remove-file {
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .remove-file:hover {
+            color: #c82333;
+        }
+
+        #analyzeBtn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #analyzeBtn:hover {
+            background-color: #0056b3;
+            transform: scale(1.02);
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background-color: #f1f3f5;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #007bff;
+            margin-top: 20px;
+        }
+
+        .loading:after {
+            content: '\2026';
+            animation: dots 1s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+
+            0%,
+            20% {
+                color: rgba(0, 0, 0, 0);
+                text-shadow: .25em 0 0 rgba(0, 0, 0, 0), .5em 0 0 rgba(0, 0, 0, 0);
+            }
+
+            40% {
+                color: black;
+                text-shadow: .25em 0 0 rgba(0, 0, 0, 0), .5em 0 0 rgba(0, 0, 0, 0);
+            }
+
+            60% {
+                text-shadow: .25em 0 0 black, .5em 0 0 rgba(0, 0, 0, 0);
+            }
+
+            80%,
+            100% {
+                text-shadow: .25em 0 0 black, .5em 0 0 black;
+            }
+        }
+
+        h1.text-center {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            color: #333;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        h1.text-center i {
+            margin-right: 10px;
+            color: #007bff;
+            /* Cor do ícone */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="logo-container">
+            <!--    <img src="static/images/logoF.png" alt="Logo"> -->
+
+            <h1 class="text-center">
+                <i class="fas fa-robot"></i> Gerador de Habilitação com IA
+            </h1>
+        </div>
+
+        <!-- <h1>Sistema de Análise de Licitações</h1> -->
+
+        <h2>Upload do Edital</h2>
+        <div class="upload-area" id="uploadAreaEdital">
+            <p>Arraste e solte o arquivo do edital aqui ou clique para selecionar</p>
+            <input type="file" id="fileInputEdital" accept=".pdf,.docx,.txt" style="display: none;">
+        </div>
+        <div id="fileListEdital" class="file-list"></div>
+
+        <h2>Upload dos Atestados</h2>
+        <div class="upload-area" id="uploadAreaAtestados">
+            <p>Arraste e solte os arquivos de atestados aqui ou clique para selecionar</p>
+            <input type="file" id="fileInputAtestados" multiple accept=".pdf,.docx,.txt" style="display: none;">
+        </div>
+        <div id="fileListAtestados" class="file-list"></div>
+
+        <button id="analyzeBtn" style="display: none;">Analisar Documentos</button>
+        <div class="loading" id="loading">Analisando</div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const uploadAreaEdital = document.getElementById('uploadAreaEdital');
+        const fileInputEdital = document.getElementById('fileInputEdital');
+        const fileListEdital = document.getElementById('fileListEdital');
+
+        const uploadAreaAtestados = document.getElementById('uploadAreaAtestados');
+        const fileInputAtestados = document.getElementById('fileInputAtestados');
+        const fileListAtestados = document.getElementById('fileListAtestados');
+
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const loading = document.getElementById('loading');
+        const result = document.getElementById('result');
+
+        let editalFile = null;
+        let atestadosFiles = [];
+
+        function setupFileUpload(uploadArea, fileInput, fileList, isEdital) {
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.backgroundColor = '#e9ecef';
+                uploadArea.style.borderColor = '#0056b3';
+            });
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.backgroundColor = '#f8f9fa';
+                uploadArea.style.borderColor = '#007bff';
+            });
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.backgroundColor = '#f8f9fa';
+                uploadArea.style.borderColor = '#007bff';
+                handleFiles(e.dataTransfer.files, isEdital);
+            });
+            fileInput.addEventListener('change', (e) => handleFiles(e.target.files, isEdital));
+        }
+
+        setupFileUpload(uploadAreaEdital, fileInputEdital, fileListEdital, true);
+        setupFileUpload(uploadAreaAtestados, fileInputAtestados, fileListAtestados, false);
+
+        function handleFiles(files, isEdital) {
+            if (isEdital) {
+                if (files.length > 0 && isValidFileType(files[0])) {
+                    editalFile = files[0];
+                    updateFileList(fileListEdital, [editalFile], true);
+                } else {
+                    alert('Tipo de arquivo inválido para o edital.');
+                }
+            } else {
+                for (let file of files) {
+                    if (isValidFileType(file) && !atestadosFiles.some(f => f.name === file.name)) {
+                        atestadosFiles.push(file);
+                    }
+                }
+                updateFileList(fileListAtestados, atestadosFiles, false);
+            }
+            updateAnalyzeButtonVisibility();
+        }
+
+        function isValidFileType(file) {
+            return ['.pdf', '.docx', '.txt'].some(ext => file.name.toLowerCase().endsWith(ext));
+        }
+
+        function updateFileList(fileListElement, files, isEdital) {
+            fileListElement.innerHTML = '';
+            files.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <span>${file.name}</span>
+                    <span class="remove-file" data-index="${index}">&#10006;</span>
+                `;
+                fileListElement.appendChild(fileItem);
+            });
+
+            fileListElement.querySelectorAll('.remove-file').forEach(button => {
+                button.addEventListener('click', () => {
+                    const index = parseInt(button.getAttribute('data-index'));
+                    if (isEdital) {
+                        editalFile = null;
+                    } else {
+                        atestadosFiles.splice(index, 1);
+                    }
+                    updateFileList(fileListElement, isEdital ? [editalFile] : atestadosFiles, isEdital);
+                    updateAnalyzeButtonVisibility();
+                });
+            });
+        }
+
+        function updateAnalyzeButtonVisibility() {
+            analyzeBtn.style.display = editalFile && atestadosFiles.length > 0 ? 'block' : 'none';
+        }
+
+        analyzeBtn.addEventListener('click', analyzeDocuments);
+
+        async function analyzeDocuments() {
+            loading.style.display = 'block';
+            result.innerHTML = '';
+
+            const formData = new FormData();
+            if (editalFile) formData.append('edital', editalFile);
+            atestadosFiles.forEach(file => formData.append('atestados', file));
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro na análise');
+                }
+
+                const data = await response.json();
+                displayResults(data.result);
+            } catch (error) {
+                console.error('Erro na análise:', error);
+                result.innerHTML = '<p>Ocorreu um erro durante a análise. Por favor, tente novamente.</p>';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        function displayResults(analysisResult) {
+            result.innerHTML = `<h2>Resultados da Análise</h2><p>${analysisResult.replace(/\n/g, '<br>')}</p>`;
+        }
+    </script>
+</body>
+
+</html>
